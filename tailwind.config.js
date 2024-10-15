@@ -6,6 +6,13 @@ export default {
   ],
   theme: {
     extend: {
+      container:{
+        center:true,
+        padding: "1rem",
+        screens: {
+          "2xl": "1400px"
+        },
+      },
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
         MonaSpace: ['MonaspaceArgon', 'sans-serif']
