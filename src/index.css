@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(./assets/Roboto-Light.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: 'MonaspaceArgon';
+    font-weight: normal;
+    font-style: normal;
+    font-weight: 400;
+    src: url(./assets/MonaspaceArgon.woff) format('woff');
+  }
+}
+
+@layer utilities {
+  .text-shadow-glow {
+    text-shadow: rgba(0, 255, 30, 0.8) 0px 0px 40px;
+  }
+  .border-top-custom {
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+  }
+  .border-bottom-custom {
+    border-bottom-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+  }
+  .text-smaller {
+    font-size: 10px;
+  }
+  .text-smallest {
+    font-size: 8px;
+  }
+  .h-for-small {
+    height: 70vh;
+  }
+}
