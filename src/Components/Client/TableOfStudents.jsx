@@ -4,19 +4,20 @@ import { HiDotsVertical } from 'react-icons/hi'
 import { MdEdit } from 'react-icons/md'
 
 export const arrOfTitle = [
-  "მოსწავლის სახელი",
-  "მოსწავლის ასაკი",
-  "მოსწავლის ჯგუფი",
-  "სიჩქარე",
-  "Facebook",
-  "მშობლის სახელი",
-  "მშობლის Facebook",
-  "დონე",
-  "როლი",
-  "მოსწავლის ლიდერი",
-  "ქულა ლიდერისგან",
-  "ქულა გამოცდიდან",
-  "ქულა GitHub-ზე"
+  ["student_name", "მოსწავლის სახელი",],
+  ["student_age", "მოსწავლის ასაკი",],
+  ["student_group", "მოსწავლის ჯგუფი",],
+  ["student_speed", "სიჩქარე"],
+  ["student_github", "git"],
+  ["student_facebook", "Facebook"],
+  ["parent_name", "მშობლის სახელი"],
+  ["parent_facebook", "მშობლის Facebook"],
+  ["student_level", "დონე"],
+  ["student_role", "როლი"],
+  ["leader_of_student", "მოსწავლის ლიდერი"],
+  ["Score_from_leader", "ქულა ლიდერისგან"],
+  ["score_from_quiz", "ქულა გამოცდიდან"],
+  ["score_from_github", "ქულა GitHub-ზე"]
 ]
 
 export const studentsData = [
@@ -25,6 +26,7 @@ export const studentsData = [
     student_age: 19,
     student_group: 33,
     student_speed: 4,
+    student_github: "https://github.com",
     student_facebook: "https://www.facebook.com/daviti",
     parent_name: "გიორგი სმითი",
     parent_facebook: "https://www.facebook.com/giorgis",
@@ -35,17 +37,17 @@ export const studentsData = [
     score_from_quiz: 92,
     score_from_github: 78,
   },
+
 ]
 
-const arrOfStudentDataKeys = Object.keys(studentsData[0])
-
-const TableOfStudents = ({ searchQuery }) => {
+const TableOfStudents = ({ searchQuery, selectedGroup }) => {
+const arrOfStudentDataKeys = selectedGroup.map(item => item[0])
   const [students, setStudents] = useState(studentsData)
   const [menuEdit, setMenuEdit] = useState(null)
   const [editingIndex, setEditingIndex] = useState(null)
   const [editedStudent, setEditedStudent] = useState(null)
-  
-  const filteredStudents = students.filter(student =>
+
+  const filteredStudents = students.filter((student) =>
     student.student_name.includes(searchQuery) ||
     student.student_group.toString().includes(searchQuery)
   )
@@ -84,35 +86,35 @@ const TableOfStudents = ({ searchQuery }) => {
 
   return (
     <div>
-      <table className='overflow-auto w-[1550px]'>
+      <table className='overflow-auto'>
         <thead className='border-b-2 border-gray-500 table-auto w-full'>
           <tr className='text-gray-600'>
-            {arrOfTitle.map((item, index) => (
-              <th className='p-1' key={`_title--name-${index}`}>{item}</th>
+            {selectedGroup.map((item, index) => (
+              <th className='p-1' key={`_title--name-${index}`}>{item[1]}</th>
             ))}
           </tr>
         </thead>
-        <tbody className='border-spacing-5'>
-          {filteredStudents.length === 0 ? (
+        <tbody className='border-spacing-1'>
+          {selectedGroup.length === 0 ? (
             <tr className='bg-red-500'>
-              <td colSpan={arrOfTitle.length} className="text-center text-gray-500">სტუდენტი არ მოიძებნება</td>
+              <td colSpan={1} className="text-center text-gray-500">სტუდენტი არ მოიძებნება</td>
             </tr>
           ) : (
             filteredStudents.map((student, index) => (
               <tr className='text-gray-800 text-center' key={index}>
                 {arrOfStudentDataKeys.map((key) => (
-                  <td key={key} className={`${index % 2 === 0 ? "bg-gray-400" : "bg-gray-500"} w-[780px]`}>
+                  <td key={key} className={`${index % 2 === 0 ? "bg-gray-400" : "bg-gray-500"} w-full`}>
                     {editingIndex === index ? (
-                      <input 
+                      <input
                         className={` outline-none p-2 border-none ${index % 2 === 0 ? "bg-gray-400" : "bg-gray-500"}`}
-                        type="text" 
-                        value={editedStudent[key]} 
+                        type="text"
+                        value={editedStudent[key]}
                         placeholder='edit...'
                         onChange={(e) => handleChange(key, e.target.value)}
                       />
                     ) : (
-                      key === "student_facebook" || key === "parent_facebook" ? (
-                        <a href={student[key]} target="_blank" rel="noopener noreferrer">Facebook</a>
+                        key === "student_facebook" || key === "parent_facebook" || key === "student_github" ? (
+                          <a href={student[key]} target="_blank" rel="noopener noreferrer">Click to enter</a>
                       ) : (
                         student[key]
                       )
@@ -125,14 +127,14 @@ const TableOfStudents = ({ searchQuery }) => {
                     <div className="absolute z-[2] mt-[-.4rem] right-3 p-1">
                       {(menuEdit === index) &&
                         <div className="flex justify-between gap-1 flex-col bg-white p-1 rounded-md">
-                          <div 
+                          <div
                             className="flex items-center gap-2 rounded-md bg-red-500 p-2 text-white cursor-pointer"
                             onClick={() => handleDelete(index)}
                           >
                             <span>delete</span>
                             <FaRegTrashAlt />
                           </div>
-                          <div 
+                          <div
                             className="flex justify-between items-center gap-2 rounded-md bg-blue-500 p-2 cursor-pointer"
                             onClick={() => handleEdit(index)}
                           >
@@ -153,9 +155,6 @@ const TableOfStudents = ({ searchQuery }) => {
         <div>
           <button onClick={handleSaveEdit} className="absolute mt-[2rem] bg-green-500 text-white p-2 rounded">
             Save Changes
-          </button>
-          <button onClick={() => setEditingIndex(null)} className="absolute ml-[8rem] mt-[2rem] bg-blue-500 text-white p-2 rounded">
-            Cancel
           </button>
         </div>
       )}

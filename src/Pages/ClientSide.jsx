@@ -15,9 +15,6 @@ const ClientSide = () => {
   const handleGroupChange = (group) => {
     setSelectedGroup(group)
   }
-  const handleSelectGroup = () => {
-    return selectedGroup
-  }
   return (
     <div className='container'>
       <div className='flex items-center gap-2'>
@@ -25,12 +22,12 @@ const ClientSide = () => {
           <StudentSearch onSearch={handleSearch} />
         </div>
         <div>
-          <StudentFilter onFilterChange={handleGroupChange} onHandleSelectGroup={handleSelectGroup} />
+          <StudentFilter onFilterChange={handleGroupChange}/>
         </div>
       </div>
       <div className='relative '>
         <div className="border-2 border-black/10 rounded-lg p-2 overflow-x-auto">
-          <TableOfStudents searchQuery={searchQuery} selectedGroup={handleSelectGroup()} />
+          <TableOfStudents searchQuery={searchQuery} selectedGroup={selectedGroup} />
         </div>
       </div>
     </div>

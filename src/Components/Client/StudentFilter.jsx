@@ -41,7 +41,7 @@ const StudentFilter = ({ onFilterChange }) => {
   }
 
   const filteredOptions = arrOfTitle.filter(item =>
-    item.toLowerCase().includes(query.toLowerCase())
+    item[1].toLowerCase().includes(query.toLowerCase())
   )
 
   const isSelected = (item) => selectedItems.includes(item) // Helper function to check selection
@@ -89,7 +89,7 @@ const StudentFilter = ({ onFilterChange }) => {
                   onClick={() => handleOptionClick(item)}
                   className={`flex justify-between p-2 cursor-pointer hover: transition-colors ${isSelected(item) ? 'bg-blue-200' : ''}`}
                 >
-                  {item}
+                  {item[1]}
                   <input type="checkbox" checked={isSelected(item)} disabled /> {/* Disabled checkbox for visual representation */}
                 </div>
               ))
