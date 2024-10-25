@@ -23,15 +23,15 @@ const FooterMain = () => {
 
                         <div className="flex items-end pt-10 max-[800px]:pt-4">
                             <a href="https://www.facebook.com/nika11keshelava" target='_blank'>
-                                <img src={facebook} alt='facebook' />
+                                <img src={facebook} alt='facebook' className="pointer-events-none"/>
                             </a>
 
                             <a href="https://www.youtube.com/@Goal_Oriented_Academy__GOA" className="pl-6" target='_blank'>
-                                <img src={youtube} alt='youtube' />
+                                <img src={youtube} alt='youtube' className="pointer-events-none" />
                             </a>
 
                             <a href="https://github.com/GoaSoftwareDevelopment" className="pl-6" target='_blank'>
-                                <img src={github} alt='github' />
+                                <img src={github} alt='github' className="pointer-events-none" />
                             </a>
                         </div>
                     </div>
