@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const StudentSearch = ({ onSearch }) => {
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState()
 
   const handleSearch = (event) => {
     setQuery(event.target.value)

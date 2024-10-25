@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { arrOfTitle } from './TableOfStudents'
+import { DataObj } from '../../constants'
 
 const StudentFilter = ({ onFilterChange }) => {
-  const [selectedItems, setSelectedItems] = useState([]) // State to store selected items
+  const [arrOfTlle, setArrOfTlle] = useState(DataObj.title.arrOfTitle)
+  const [selectedItems, setSelectedItems] = useState(DataObj.title.arrOfTitle) // State to store selected items
   const [query, setQuery] = useState('')
   const [isOpen, setIsOpen] = useState(false)
 
@@ -25,14 +26,14 @@ const StudentFilter = ({ onFilterChange }) => {
   }
 
   const handleSelectAll = () => {
-    if (selectedItems.length === arrOfTitle.length) {
+    if (selectedItems.length === arrOfTlle.length) {
       // Deselect all
       setSelectedItems([])
       onFilterChange([]) // Notify parent
     } else {
       // Select all
-      setSelectedItems(arrOfTitle)
-      onFilterChange(arrOfTitle) // Notify parent
+      setSelectedItems(arrOfTlle)
+      onFilterChange(arrOfTlle) // Notify parent
     }
   }
 
@@ -40,7 +41,7 @@ const StudentFilter = ({ onFilterChange }) => {
     setIsOpen(!isOpen)
   }
 
-  const filteredOptions = arrOfTitle.filter(item =>
+  const filteredOptions = arrOfTlle.filter(item =>
     item[1].toLowerCase().includes(query.toLowerCase())
   )
 
@@ -73,10 +74,10 @@ const StudentFilter = ({ onFilterChange }) => {
           </div>
           <ul className='max-h-40 overflow-y-auto border-t border-gray-300'>
             <li onClick={() => handleSelectAll()} className='flex justify-between p-2 cursor-pointer hover: transition-colors'>
-              <span onClick={() => selectedItems.length === arrOfTitle.length}>Select All</span>
+              <span onClick={() => selectedItems.length === arrOfTlle.length}>Select All</span>
               <input
                 type="checkbox"
-                checked={selectedItems.length === arrOfTitle.length}
+                checked={selectedItems.length === arrOfTlle.length}
                 onChange={handleSelectAll}
               />
             </li>

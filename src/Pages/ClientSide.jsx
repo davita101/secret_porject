@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import TableOfStudents, { arrOfTitle } from '../Components/Client/TableOfStudents'
 import StudentFilter from '../Components/Client/StudentFilter'
 import StudentSearch from '../Components/Client/StudentSearch'
+import { DataObj } from '../constants'
+import TableOfStudents from '../Components/Client/TableOfStudents'
 
 const ClientSide = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedGroup, setSelectedGroup] = useState(arrOfTitle)
+  const [selectedGroup, setSelectedGroup] = useState(DataObj.title.arrOfTitle)
 
   const handleSearch = (query) => {
     setSearchQuery(query)
