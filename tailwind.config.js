@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        '14': 'repeat(14, 300px)',
+      },
       container:{
         center:true,
         padding: "1rem",
